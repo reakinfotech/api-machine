@@ -265,9 +265,7 @@ Here's the API documentation for the provided Flask application. This documentat
   ```json
   {
     "slideMin": 0,
-    "slideMax": 
-
-100
+    "slideMax": 100
   }
   ```
 
