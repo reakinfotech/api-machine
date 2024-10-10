@@ -8,7 +8,7 @@ CORS(app)
 # Define state variables for Autoblow
 autoblow_state = {
     "connected": True,
-    "cluster": "192.168.1.129:5000",
+    "cluster": "localhost:5000",
     "operationalMode": "ONLINE_CONNECTED",
     "localScript": 0,
     "localScriptSpeed": 0,
@@ -158,8 +158,36 @@ def put_hssp_stop():
 def get_servertime():
     return jsonify({"serverTime": int(time.time() * 1000) + handy_state["server_time_offset"]}), 200
 
+
+@handy_api.route('/hdsp/xpvp', methods=['PUT'])
+def xpvp():
+    # Parse the JSON request body
+    data = request.get_json()
+
+    # Validate the incoming data (optional)
+    if not data or 'position' not in data or 'velocity' not in data:
+        return jsonify({"error": "Invalid input"}), 400
+
+    # Extract values from the request
+    stop_on_target =  False
+    immediate_response = False
+    position = data["position"]
+    velocity = data["velocity"]
+
+    # Here you would add your logic to handle the request
+    # For now, we'll just return a static response
+    response = {
+        "result": 3
+    }
+
+    return jsonify(response)
+
+
+
+
+
 # Register the Handy Blueprint
 app.register_blueprint(handy_api)
 
 if __name__ == '__main__':
-    app.run(host='192.168.1.129', port=5000, debug=True)
+    app.run(host='localhost', port=5000, debug=True)
