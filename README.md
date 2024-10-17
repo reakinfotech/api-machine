@@ -333,6 +333,15 @@ Here's the API documentation for the provided Flask application. This documentat
   }
   ```
 
+### 12. `GET /api/handy/v2/xpvp`
+- **Description**: Sets the next percent position (xp) of the device, and the percent velocity (vp) the device should use to reach the position.
+- **Response**:
+  ```json
+  {
+     "result": 3
+  }
+  ```
+
 ---
 
 This documentation covers the primary endpoints of both the Autoblow and Handy APIs, detailing the requests and responses for each route.
