@@ -163,9 +163,9 @@ def put_hssp_stop():
 def get_servertime():
     return jsonify({"serverTime": int(time.time() * 1000) + handy_state["server_time_offset"]}), 200
 
-
+# Sets the next percent position (xp) of the device, and the percent velocity (vp) the device should use to reach the position.
 @handy_api.route('/hdsp/xpvp', methods=['PUT'])
-def xpvp():
+def xpvp(): 
     # Parse the JSON request body
     data = request.get_json()
     print(data)
