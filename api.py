@@ -5,10 +5,14 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
+
+url= "localhost"
+port= "5000"
+
 # Define state variables for Autoblow
 autoblow_state = {
     "connected": True,
-    "cluster": "localhost:5000",
+    "cluster": url+":"+port,
     "operationalMode": "ONLINE_CONNECTED",
     "localScript": 0,
     "localScriptSpeed": 0,
@@ -82,6 +86,7 @@ def goto():
     autoblow_state["position"] = data.get("position", None)
     autoblow_state["oscillatorTargetSpeed"] = data.get("speed", 50)
     autoblow_state["operationalMode"] = "GO_TO"
+    print(autoblow_state)
     return jsonify(autoblow_state), 200
 
 # Handy API setup
@@ -163,7 +168,7 @@ def get_servertime():
 def xpvp():
     # Parse the JSON request body
     data = request.get_json()
-
+    print(data)
     # Validate the incoming data (optional)
     if not data or 'position' not in data or 'velocity' not in data:
         return jsonify({"error": "Invalid input"}), 400
@@ -184,10 +189,8 @@ def xpvp():
 
 
 
-
-
 # Register the Handy Blueprint
 app.register_blueprint(handy_api)
 
 if __name__ == '__main__':
-    app.run(host='localhost', port=5000, debug=True)
+    app.run(host=url, port=port, debug=True)
